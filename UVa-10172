@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int set,n,s,q;
+    cin>>set;
+    for (int i=0; i<set; i++)
+    {
+        vector<queue <int>> qs;
+        stack<int> cs;
+        cin>>n>>s>>q;
+        int min;
+        min=-2;
+        int zc=0;
+        for (int j=0;j<n;j++)
+        {
+            int qi;
+            cin>>qi;
+            queue <int> qis;
+            if (qi==0)
+            {
+                zc++;
+            }
+            for (int k=0; k<qi; k++)
+            {
+                int a;
+                cin>>a;
+                qis.push(a);
+            }
+            qs.push_back(qis);
+        }
+        int st=1;
+        int qr=qs.size()-zc;
+            while (qr>0 || cs.size()>0)
+            {
+                int b=0;
+                min+=2;
+                //descarga
+                int al=0;
+                while (b==0)
+                {
+                    if (cs.size()>0 && cs.top()==st)
+                    {
+                        cs.pop();
+                        min+=1;
+                        al=1;
+                    }
+                    else if (cs.size()>0 && cs.top()!=st && qs[st-1].size()<q)
+                    {
+                        if (qs[st-1].size()==0)
+                        {
+                            qr++;
+                        }
+                        int c=cs.top();
+                        cs.pop();
+                        qs[st-1].push(c);
+                        min+=1;
+                        al=0;
+                        
+                    }
+                    else
+                    {
+                        b=1;
+                        break;
+                    }
+                }
+                //carga
+                int d=0;
+                while (d==0)
+                {
+                    if (cs.size()<s && qs[st-1].size()>0)
+                        {
+                            int c;
+                            c=qs[st-1].front();
+                            qs[st-1].pop();
+                            if (qs[st-1].size()==0)
+                            {
+                                qr--;
+                            }
+                            cs.push(c);
+                            min+=1;
+                        }
+                        else
+                        {
+                            d=1;
+                            break;
+                        }
+                }
+                st++;
+                if (st==n+1)
+                {
+                    st=1;
+                }
+            }
+        cout<<min<<endl;
+    }
+    return 0;
+}
