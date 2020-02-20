@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   int n;
+   n=1;
+   vector<int> r;
+   while (n>0)
+   {
+       vector<vector <int>> sc;
+       vector<int> rs;
+       cin>>n;
+       if (n==0)
+       {
+           break;
+       }
+       for (int i=0; i<n; i++)
+       {
+           int pos;
+           int a,b,c,d,e;
+           cin>>a>>b>>c>>d>>e;
+           vector <int>s={a,b,c,d,e};
+           sort(s.begin(),s.end());
+           if (i==0)
+           {
+               sc.push_back(s);
+               rs.push_back(1);
+           }
+           else
+           {
+                int rep=0;
+                for (int j=0;j<sc.size();j++)
+                {
+                 if (s==sc[j])
+                 {
+                     rep=1;
+                     pos=j;
+                 }
+                }
+  
+                if (rep==0)
+                {
+                    sc.push_back(s);
+                    rs.push_back(1);
+                }
+                else
+                {
+                    int nv=rs[pos]+1;
+                    rs[pos]=nv;
+                }
+           }
+       }
+       int max=*max_element(rs.begin(),rs.end());
+       int cmax=0;
+       for (int j=0;j<rs.size();j++)
+       {
+           if (rs[j]==max)
+           {
+               cmax=cmax+max;
+           }
+       }
+       cout<<cmax<<endl;
+   }
+   return 0;
+}
