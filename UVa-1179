@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int c;
+    cin>>c;
+    for (int i=0;i<c;i++)
+    {
+        vector <int> v;
+        int n;
+        cin>>n;
+        for (int j=0;j<n;j++)
+        {
+            int a;
+            cin>>a;
+            v.push_back(a);
+        }
+        int maxsp=*max_element(v.begin(),v.end());
+        cout<<"Case "<<i+1<<": "<<maxsp<<endl;
+    }
+   return 0;
+}
