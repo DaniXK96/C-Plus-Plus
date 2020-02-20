@@ -1,0 +1,126 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n,c,k;
+    n=1;
+    c=1;
+    k=0;
+    vector<vector<int>> t;
+    while (n!=0)
+    {
+        cin>>n;
+        if (n!=0)
+        {
+            c=1;
+        }
+        else
+        {
+            c=0;
+        }
+        while (c!=0 && n!=0)
+        {
+            vector<int> a;
+            for (int i=0;i<n;i++)
+            {
+                cin>>c;
+                if (c==0)
+                {
+                    break;
+                }
+                a.push_back(c);
+            }
+            if (c!=0)
+            {
+                t.push_back(a);
+            }
+            else
+            {
+                vector<int> a;
+                a.push_back(0);
+                t.push_back(a);
+            }
+        }
+    }
+    int ct= t.size();
+    vector<int> r;
+    for (int i=0;i<ct;i++)
+    {
+        vector<int> ta=t[i];
+        int cc=ta.size();
+        if (ta[0]!=0)
+        {
+            vector <int> ss,sa;
+            int ra;
+            ra=2;
+            for (int j=0;j<cc;j++)
+            {
+                sa.push_back(j+1);
+            }
+            int css=ss.size();
+            int csa=sa.size();
+            while (ta.size()!=0)
+            {
+                if (css==0 && csa==0)
+                {
+                    break;
+                }
+               else if (ta[0]==sa[0] && csa!=0)
+                {
+                    sa.erase(sa.begin());
+                    ta.erase(ta.begin()); 
+                    csa=sa.size();
+                }
+                else if(css!=0 && ta[0]==ss[css-1])
+                {
+                    ss.erase(ss.begin() +css -1);
+                    ta.erase(ta.begin());
+                    css=ss.size();
+                   
+                }
+                else if(csa==0 && css !=0 &&ta[0]!=ss[css-1])
+                {
+                    ra=0;
+                    break;
+                }
+
+                else if (ta.size()!=0 && sa.size()!=0)
+                {
+                    ss.push_back(sa[0]);
+                    sa.erase(sa.begin());
+                    css=ss.size();
+                    csa=sa.size();
+                }
+                
+            }
+            
+            if (ra!=0)
+            {
+                ra=1;
+            }
+            r.push_back(ra);
+        }
+        else
+        {
+            r.push_back(-1);
+        }
+    }
+    int cr=r.size();
+    for (int i=0;i<cr-1;i++)
+    {
+        if (r[i]==1)
+        {
+            cout<<"Yes"<<endl;
+        }
+        else if(r[i]==0)
+        {
+            cout<<"No"<<endl;
+        }
+        else
+        {
+            cout<<endl;
+        }
+    }
+    return 0;
+}
