@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    map <string, string> dic;
+    string linea;
+    while (getline(cin,linea))
+    {
+        if (linea.empty())
+        {
+            break;
+        }
+        string w;
+        string k;
+        for (int i=0;i<linea.length();i++)
+        {
+            if (linea[i]!=' ')
+            {
+                k.push_back(linea[i]);
+            }
+            else
+            {
+                w=k;
+                k.clear();
+            }
+        }
+        dic.insert(pair <string,string> (k,w));
+    }
+    while (getline(cin,linea))
+    {
+        if (linea.empty())
+        {
+            break;
+        }
+        if (dic.find(linea)!=dic.end())
+        {
+            cout<<dic.find(linea)->second<<endl;
+        }
+        else
+        {
+            cout<<"eh"<<endl;
+        }
+    }
+    return 0;
+}
