@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int c,r,n;
+    cin>>n;
+    for (int i=0;i<n;i++)
+    {
+        vector <int> re;
+        cin>>c>>r;
+        int num=c;;
+        int d=c-r;
+        if (c!=r)
+        {
+        for(int j=1; pow(j,2)<=c-r;j++)
+        {
+            if (d%j==0)
+            {
+                re.push_back(j);
+                re.push_back(d/j);
+            }
+        }
+        sort(re.begin(),re.end());
+        int pos;
+        if (r!=0)
+        {
+            for (int k=0;k<re.size();k++)
+            {
+                if (re[k]<=r)
+                pos=k;
+            }
+            re.erase(re.begin(),re.begin()+pos+1);
+        }
+        cout<<"Case #"<<i+1<<":";
+        for (int k=0;k<re.size();k++)
+        {
+            if (k==0)
+            {
+                cout<<" "<<re[k];
+            }
+            else if(re[k]!=re[k-1])
+            {
+                cout<<" "<<re[k];
+            }
+        }
+        cout<<endl;
+        }
+        else
+        {
+            cout<<"Case #"<<i+1<<": "<<0<<endl;
+        }
+    }
+}
