@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int nc, nk;
+    cin >> nc >> nk;
+    while(nc!=0 || nk!=0)
+    {
+        vector<int> dc,ak;
+        for (int i = 0; i < nc;i++)
+        {
+            int num;
+            cin >> num;
+            dc.push_back(num);
+        }
+        int sum = 0;
+        sort(dc.begin(), dc.end());
+        int m=1;
+        int nk2=nk;
+        for (int i = 0; i < nk;i++)
+        {
+            int num;
+            cin >> num;
+            ak.push_back(num);
+        }
+        sort(ak.begin(),ak.end());
+        for (int i=0;i<nk;i++)
+        {
+            int num=ak[i];
+            int pos;
+            auto it=upper_bound(dc.begin(),dc.end(),num);
+            pos=it-dc.begin();
+            int su=0;
+            if (pos<=0)
+            {
+                if (nk2<=nc)
+                {
+                    m=0;
+                }
+                else
+                {
+                    nk2--;
+                    su=1;
+                }
+            }
+            if (m==1 && su==0)
+            {
+                sum += num;
+                dc.erase(dc.begin()+pos-1);
+            }
+            else if (m==0)
+            {
+                sum = -1;
+            }            
+        }
+        if (sum<0 || nk<nc)
+        {
+            cout << "Loowater is doomed!" << endl;
+        }
+         else
+        {
+            cout << sum << endl;
+        }
+        
+        cin >> nc >> nk;
+    }
+    
+    return 0;
+}
